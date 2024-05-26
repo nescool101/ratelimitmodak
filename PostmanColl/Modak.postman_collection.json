@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "241edeaa-38c0-493c-ad55-f191713d5fda",
+		"name": "Modak",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8889996",
+		"_collection_link": "https://cloudy-firefly-30794.postman.co/workspace/personalProjects~62add125-25a5-4cf7-973b-fd50fee26e6d/collection/8889996-241edeaa-38c0-493c-ad55-f191713d5fda?action=share&source=collection_link&creator=8889996"
+	},
+	"item": [
+		{
+			"name": "createRuleLimit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": \"NewsLetter\",\r\n  \"limit\": 1,\r\n  \"periodInSeconds\": 3600\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/ratelimit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"ratelimit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "notificationSend",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": \"News\",\r\n  \"userId\": \"nescao@gmail.com\",\r\n  \"message\": \"send mail to nescao\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/notification/send",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"notification",
+						"send"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
