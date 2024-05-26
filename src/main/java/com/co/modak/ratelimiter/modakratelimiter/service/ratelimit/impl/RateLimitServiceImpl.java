@@ -5,7 +5,15 @@ import com.co.modak.ratelimiter.modakratelimiter.exception.impl.ResourceNotFound
 import com.co.modak.ratelimiter.modakratelimiter.model.notification.dto.NotificationDTO;
 import com.co.modak.ratelimiter.modakratelimiter.model.rateLimitRule.dto.RateLimitRuleDTO;
 import com.co.modak.ratelimiter.modakratelimiter.service.ratelimit.RateLimitService;
+import com.co.modak.ratelimiter.modakratelimiter.service.ratelimit.SendMailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.SendGrid;
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
 import lombok.AllArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -21,6 +29,7 @@ public class RateLimitServiceImpl implements RateLimitService {
 
     private StringRedisTemplate jedis;
     private ObjectMapper objectMapper;
+    private final SendMailService sendMailService;
 
     @Override
     public void saveRateLimitRule(RateLimitRuleDTO rateLimitRule){
@@ -49,13 +58,15 @@ public class RateLimitServiceImpl implements RateLimitService {
             throw new ResourceBadRequestException(JSONPARSEEXCEPTION);
         }
 
-        String key = notificationDTO.userId() +":"+ notificationDTO.type();
+        String key = notificationDTO.userMail() +":"+ notificationDTO.type();
         String countJson = jedis.opsForValue().get(key);
 
         int count = countJson != null ? Integer.parseInt(countJson) : 0;
 
         if (count < rateLimitRule.limit()) {
             System.out.println("send notification: "+notificationDTO.type());
+            int myMailSvcCode= sendMailService.sendMail(notificationDTO);
+            System.out.println("send notification mail code: "+myMailSvcCode);
             jedis.opsForValue().set(key, String.valueOf(count + 1));
             jedis.expire(key, rateLimitRule.periodInSeconds(), TimeUnit.SECONDS);
             return;
