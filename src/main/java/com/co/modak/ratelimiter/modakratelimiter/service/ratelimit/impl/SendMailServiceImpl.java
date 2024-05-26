@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class SendMailServiceImpl implements SendMailService {
 
     private final static String JSONPARSEEXCEPTION = "JsonParseException";
-
+    private final SendGrid sg;
 
     @Override
     public int sendMail(NotificationDTO notificationDTO){
@@ -32,15 +32,14 @@ public class SendMailServiceImpl implements SendMailService {
             Content content = new Content("text/plain", notificationDTO.message());
             Mail mail = new Mail(from, subject, to, content);
 
-            SendGrid sg = new SendGrid("test");
             Request request = new Request();
                 request.setMethod(Method.POST);
                 request.setEndpoint("mail/send");
                 request.setBody(mail.build());
                 Response response = sg.api(request);
-                System.out.println(response.getStatusCode());
-                System.out.println(response.getBody());
-                System.out.println(response.getHeaders());
+                System.out.println("status code: "+response.getStatusCode());
+                System.out.println("body:" +response.getBody());
+                System.out.println("Headers:"+response.getHeaders());
                 return  response.getStatusCode();
         } catch (Exception exception) {
             throw new ResourceBadRequestException(JSONPARSEEXCEPTION);

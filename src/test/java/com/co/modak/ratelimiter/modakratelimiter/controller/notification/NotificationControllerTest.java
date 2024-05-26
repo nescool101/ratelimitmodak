@@ -1,3 +1,5 @@
+package com.co.modak.ratelimiter.modakratelimiter.controller.notification;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -7,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.co.modak.ratelimiter.modakratelimiter.controller.notification.NotificationController;
 import com.co.modak.ratelimiter.modakratelimiter.service.notification.NotificationService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
