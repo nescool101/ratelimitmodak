@@ -18,4 +18,8 @@ add your credentials to send your mail, also change the sender mail
 also to see the swagger>
 http://localhost:8080/swagger-ui/index.html
 
+to see the detailed document go to>
+https://docs.google.com/document/d/1N8PBt-RpUgBopVbwDH91YAlKdfhpuQe_YxtC-vVC2ZM/edit?usp=sharing
+
+
 

@@ -7,13 +7,6 @@ import com.co.modak.ratelimiter.modakratelimiter.model.rateLimitRule.dto.RateLim
 import com.co.modak.ratelimiter.modakratelimiter.service.ratelimit.RateLimitService;
 import com.co.modak.ratelimiter.modakratelimiter.service.ratelimit.SendMailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sendgrid.Method;
-import com.sendgrid.Request;
-import com.sendgrid.Response;
-import com.sendgrid.SendGrid;
-import com.sendgrid.helpers.mail.Mail;
-import com.sendgrid.helpers.mail.objects.Content;
-import com.sendgrid.helpers.mail.objects.Email;
 import lombok.AllArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
